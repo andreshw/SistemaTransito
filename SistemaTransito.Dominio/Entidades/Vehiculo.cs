@@ -12,7 +12,7 @@ namespace SistemaTransito.Dominio.Entidades
     {
         public Guid Id { get; set; }
 
-        [DisplayName("Numero Chasis")]
+        [DisplayName("Numero de Chasis")]
         public string NumeroChasis { get; set; }
 
         public TipoVehiculo TipoVehiculo { get; set; }

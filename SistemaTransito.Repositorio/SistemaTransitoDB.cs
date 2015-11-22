@@ -10,6 +10,11 @@ namespace SistemaTransito.Repositorio
 {
     public class SistemaTransitoDB : DbContext
     {
+        public SistemaTransitoDB()
+            : base("DefaultConnection")
+        {
+        }
+
         public DbSet<Vehiculo> Vehiculos { get; set; }
 
         public DbSet<Propietario> Propietarios { get; set; }

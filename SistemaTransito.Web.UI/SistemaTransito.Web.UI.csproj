@@ -39,6 +39,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EasyHttp">
+      <HintPath>..\packages\EasyHttp.1.6.80.0\lib\net40\EasyHttp.dll</HintPath>
+    </Reference>
+    <Reference Include="JsonFx">
+      <HintPath>..\packages\JsonFx.2.0.1209.2802\lib\net40\JsonFx.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -178,6 +184,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\PruebaEnfasis120152.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -216,8 +223,12 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Vehiculo\ListarVehiculos.cshtml" />
-    <Content Include="Views\Vehiculo\BuscarVehiculo.cshtml" />
-    <Content Include="Views\Vehiculo\_ListadoVehiculos.cshtml" />
+    <Content Include="Views\Vehiculo\BuscarVehiculosPorPlaca.cshtml" />
+    <Content Include="Views\Vehiculo\GuardarVehiculo.cshtml" />
+    <Content Include="Views\Vehiculo\DetallarVehiculo.cshtml" />
+    <Content Include="Views\Vehiculo\_InformacionVehiculo.cshtml" />
+    <Content Include="Views\Vehiculo\View1.cshtml" />
+    <Content Include="Views\Vehiculo\EditarVehiculo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

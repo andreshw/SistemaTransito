@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SistemaTransito.Dominio.Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,11 @@ namespace SistemaTransito.Web.UI.Controllers
     {
         public ActionResult Index()
         {
+            if (Session["VehiculoGuardado"] != null)
+            {
+                Vehiculo vehiculo = (Vehiculo)Session["VehiculoGuardado"];
+                ViewBag.MensajeVehiculo = "Ultima placa de vehiculo creado:" + vehiculo.Placa;
+            }
             return View();
         }
 

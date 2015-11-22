@@ -1,4 +1,6 @@
-﻿using SistemaTransito.Dominio.Entidades;
+﻿using EasyHttp.Http;
+using SistemaTransito.Dominio.Entidades;
+using SistemaTransito.Repositorio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,27 +11,73 @@ namespace SistemaTransito.Web.UI.Controllers
 {
     public class VehiculoController : Controller
     {
-        // GET: Vehiculo
         public ActionResult ListarVehiculos()
         {
-            List<Vehiculo> vehiculos = new List<Vehiculo>
-            {
-                new Vehiculo{ Capacidad = 3, Cilindraje=1400, Id = Guid.NewGuid(), NumeroChasis = "9tdddpo00", Placa="abc123" },
-                new Vehiculo{ Capacidad = 3, Cilindraje=1400, Id = Guid.NewGuid(), NumeroChasis = "9tdddpo00", Placa="abc123" },
-                new Vehiculo{ Capacidad = 3, Cilindraje=1400, Id = Guid.NewGuid(), NumeroChasis = "9tdddpo00", Placa="abc123" },
-            };
+            VehiculoRepositorio repositorio = new VehiculoRepositorio();
+            List<Vehiculo> vehiculos = repositorio.ConsultarVehiculos();
+            HttpClient cliente = new HttpClient();
+            //EasyHttp.Http.HttpResponse respuesta = cliente.Get("http://localhost:49671/api/vehiculo/ObtenerVehiculos");
+            //var vehiculos = respuesta.StaticBody<Vehiculo[]>();
             return View(vehiculos);
         }
 
-        public ActionResult BuscarVehiculo()
+        public ContentResult BuscarVehiculosPorPlaca(string placa)
         {
-            List<Vehiculo> vehiculos = new List<Vehiculo>
+            VehiculoRepositorio repositorio = new VehiculoRepositorio();
+            List<Vehiculo> vehiculos = new List<Vehiculo>();
+            if (!string.IsNullOrEmpty(placa))
             {
-                new Vehiculo{ Capacidad = 3, Cilindraje=1400, Id = Guid.NewGuid(), NumeroChasis = "9tdddpo00", Placa="abc123" },
-                new Vehiculo{ Capacidad = 3, Cilindraje=1400, Id = Guid.NewGuid(), NumeroChasis = "9tdddpo00", Placa="abc123" },
-                new Vehiculo{ Capacidad = 3, Cilindraje=1400, Id = Guid.NewGuid(), NumeroChasis = "9tdddpo00", Placa="abc123" },
-            };
-            return View(vehiculos);
+                vehiculos = repositorio.ConsultarVehiculosPorPlaca(placa);
+            }
+            return Content(Newtonsoft.Json.JsonConvert.SerializeObject(vehiculos));
+            //return View(vehiculos);
         }
-    }
+
+        [HttpGet]
+        public ActionResult GuardarVehiculo()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GuardarVehiculo(Vehiculo vehiculo)
+        {
+            VehiculoRepositorio repositorio = new VehiculoRepositorio();
+            vehiculo.Id = Guid.NewGuid();
+            repositorio.GuardarVehiculo(vehiculo);
+            Session["VehiculoGuardado"] = vehiculo;
+            return RedirectToAction("ListarVehiculos");
+        }
+
+        public ActionResult DetallarVehiculo(string placa)
+        {
+            VehiculoRepositorio repositorio = new VehiculoRepositorio();
+            Vehiculo vehiculo = repositorio.ConsultarVehiculoPorPlaca(placa);
+            return View(vehiculo);
+        }
+
+        [HttpGet]
+        public ActionResult EditarVehiculo(Guid id)
+        {
+            VehiculoRepositorio repositorio = new VehiculoRepositorio();
+            Vehiculo vehiculo = repositorio.ConsultarVehiculoPorId(id);
+            return View(vehiculo);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditarVehiculo(Vehiculo vehiculo)
+        {
+            VehiculoRepositorio repositorio = new VehiculoRepositorio();
+            repositorio.EditarVehiculo(vehiculo);
+            return RedirectToAction("ListarVehiculos");
+        }
+
+        [HttpGet]
+        public bool ValidarVehiculoPorPlaca(string placa)
+        {
+            VehiculoRepositorio repositorio = new VehiculoRepositorio();
+            return repositorio.ValidarVehiculoPorPlaca(placa);
+        }
+	}
 }

@@ -49,6 +49,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropietarioRepositorio.cs" />
     <Compile Include="SistemaTransitoDB.cs" />
+    <Compile Include="VehiculoRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SistemaTransito.Dominio\SistemaTransito.Dominio.csproj">

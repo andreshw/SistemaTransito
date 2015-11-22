@@ -1,0 +1,23 @@
+﻿@model SistemaTransito.Dominio.Entidades.Vehiculo
+
+<table>
+    <tr>
+        <td>@Html.DisplayNameFor(m => m.Placa)</td>
+        <td>@Html.DisplayFor(m => m.Placa)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(m => m.NumeroChasis)</td>
+        <td>@Html.DisplayFor(m => m.NumeroChasis)</td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(m => m.Capacidad)</td>
+        <td>@Html.DisplayFor(m => m.Capacidad)</td>
+    </tr>
+    <tr>
+        <td colspan="2">@Html.ActionLink("Ver Detalle", "DetallarVehiculo", new {placa = Model.Placa })</td>
+    </tr>
+    <tr>
+        <td colspan="2">@Html.ActionLink("Editar este vehiculo", "EditarVehiculo", new { id = Model.Id })</td>
+    </tr>
+</table>
+<hr />

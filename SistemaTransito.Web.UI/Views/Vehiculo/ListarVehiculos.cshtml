@@ -8,27 +8,12 @@
 <h2>ListarVehiculos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Crear Nuevo Vehiculo", "GuardarVehiculo")
+    @Html.ActionLink("Buscar vehiculos por placa", "BuscarVehiculosPorPlaca")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NumeroChasis)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Capacidad)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Cilindraje)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Placa)
-        </th>
-        <th></th>
-    </tr>
-
 @foreach (var item in Model) {
-    @Html.Partial("_ListadoVehiculos", item)
+    @Html.Partial("_InformacionVehiculo", item)
 }
 
 </table>
