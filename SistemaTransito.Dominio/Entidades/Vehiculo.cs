@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SistemaTransito.Dominio.Enumerados;
+using System.ComponentModel;
 
 namespace SistemaTransito.Dominio.Entidades
 {
@@ -11,6 +12,7 @@ namespace SistemaTransito.Dominio.Entidades
     {
         public Guid Id { get; set; }
 
+        [DisplayName("Numero Chasis")]
         public string NumeroChasis { get; set; }
 
         public TipoVehiculo TipoVehiculo { get; set; }
